@@ -1,5 +1,9 @@
-import { createBuilder } from "./index";
-import { SomeClass } from "./example2.test";
+import { createBuilder } from "./Builder";
+
+class SomeClass {
+    version: [number, number, number];
+    type?: string;
+}
 
 const A = createBuilder(new SomeClass)
     .setType("111")

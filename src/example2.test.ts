@@ -1,6 +1,6 @@
-import { createBuilder } from "./index";
+import { createBuilder } from "./Builder";
 
-export class SomeClass {
+class SomeClass {
     version: [number, number, number];
     type?: string;
 }

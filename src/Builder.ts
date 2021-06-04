@@ -1,10 +1,10 @@
-type SetterKey<K> = `set${Capitalize<string & K>}`;
+export type SetterKey<K> = `set${Capitalize<string & K>}`;
 
-type FilterOptional<T> = {
+export type FilterOptional<T> = {
     [K in keyof T]: undefined extends T[K] ? never : T[K]
 }
 
-type SetterFunctionType<O, A, R, K> = K extends A ? (
+export type SetterFunctionType<O, A, R, K> = K extends A ? (
         (v: O[keyof O & K]) => Builder<O, 
             keyof O & Exclude<A, K>, 
             keyof O & Exclude<R, K>
@@ -12,7 +12,7 @@ type SetterFunctionType<O, A, R, K> = K extends A ? (
     ) : never
 
 export type Builder<O, A = keyof O, R = keyof FilterOptional<O>> = {
-        [K in keyof O as SetterKey<K>]: 
+        [K in keyof O as SetterKey<K>]-?: 
             SetterFunctionType<O, A, R, K>
     } & {
         done: {} extends Pick<O, keyof O & R> ? () => O : never; //: never;
