@@ -1,5 +1,6 @@
 {
   "name": "type-aware-builder",
+  "type": "module",
   "version": "0.1.0",
   "description": "Object-Lens © providing builder-like interface to fill object's properties with values ",
   "main": "src/index.ts",

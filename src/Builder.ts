@@ -21,13 +21,13 @@ export type Builder<O, A = keyof O, R = keyof FilterOptional<O>> = {
 export function createBuilder<T extends object>(obj: T): Builder<T> {
   return new Proxy(obj as Builder<T>, { get })
 
-    function get(target, property, receiver) {
+    function get(target: any, property: any, receiver: any) {
 
         if (isFinish(property)) return getFinish<T>(target, property, receiver);
         
         if (isSetter(property)) return getSetter<T>(target, property, receiver) 
         
-        return undefined
+        return target
     }
 }
 
@@ -39,12 +39,12 @@ function isSetter(property: string) {
     return typeof property === "string" && /^set[A-Z]/.test(property)
 }
 
-function getFinish<T extends object>(target, property, receiver) {
+function getFinish<T extends object>(target: any, property: any, receiver: any) {
     return () => target as T
 }
 
 
-function getSetter<T extends object>(target, property, receiver) {
+function getSetter<T extends object>(target: any, property: any, receiver: any) {
 
     const name = property.slice(3, 4).toLowerCase() + property.slice(4)
     return function(value: any) {
